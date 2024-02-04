@@ -1,2 +1,9 @@
 # virtual enviroment
 .venv
+
+# development
+python_conjure.egg-info
+build
+dist
+.pdm.toml
+pypi_config.txt
