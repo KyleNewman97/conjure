@@ -1,9 +1,14 @@
 # virtual enviroment
 .venv
 
-# development
-python_conjure.egg-info
+# builds
+__pycache__
 build
 dist
+python_conjure.egg-info
+
+# development
+.env
 .pdm.toml
+.pytest_cache
 pypi_config.txt
