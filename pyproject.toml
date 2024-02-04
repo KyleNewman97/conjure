@@ -1,4 +1,9 @@
 [tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-httpx>=0.29.0",
+]
 
 [project]
 name = "python-conjure"
@@ -10,6 +15,7 @@ authors = [
 dependencies = [
     "pydantic>=2.6.0",
     "httpx>=0.26.0",
+    "python-dotenv>=1.0.1",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
