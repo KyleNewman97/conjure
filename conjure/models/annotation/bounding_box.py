@@ -7,9 +7,6 @@ class BoundingBox(BaseModel):
 
     Attributes
     ----------
-    `class_name: str`
-        A string depicting the type of object.
-
     `center_x: float`
         The center location of the bounding box along the x-axis in pixels.
 
@@ -23,7 +20,6 @@ class BoundingBox(BaseModel):
         The height of the bounding box in pixels.
     """
 
-    class_name: str
     center_x: float
     center_y: float
     width: float

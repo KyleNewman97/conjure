@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from typing import Literal
+from pydantic import BaseModel, Field
 
 
 class Classification(BaseModel):
@@ -11,4 +12,7 @@ class Classification(BaseModel):
         The name associated with the classification of the image.
     """
 
+    annotation_type: Literal["Classification"] = Field(
+        default="Classification", init=False
+    )
     class_name: str

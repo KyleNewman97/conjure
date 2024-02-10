@@ -9,6 +9,6 @@ python_conjure.egg-info
 
 # development
 .env
-.pdm.toml
+.pdm-python
 .pytest_cache
 pypi_config.txt
