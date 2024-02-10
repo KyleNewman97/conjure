@@ -1,7 +1,10 @@
 import os
 
 import httpx
+from pathlib import Path
 from dotenv import load_dotenv
+
+from conjure.models.annotation import Annotations, Classification, ObjectDetection
 
 
 class ConjureClient:
@@ -30,7 +33,7 @@ class ConjureClient:
         """
         # check the endpoint and credentials are valid
         headers = {"api-key": self._api_key}
-        response = httpx.get(self._url + "/check-api-key", headers=headers)
+        response = httpx.get(self._url + "/api-key/verify", headers=headers)
 
         # if the endpoint or credentials are not valid raise an error
         if not response.json():
@@ -39,3 +42,29 @@ class ConjureClient:
                 " API key."
             )
             raise ConnectionError(msg)
+
+    def upload_image(
+        self, image_file: Path, annotations: list[Classification | ObjectDetection]
+    ):
+        """
+        Upload an image and its annotations to the Conjure API platform.
+
+        Parameters
+        ----------
+        `image_file: Path`
+            A path to a local file to upload.
+
+        `annotations: list[Classification | ObjectDetection]`
+            A collection of annotations associated with the image.
+        """
+        endpoint = self._url + "/data/upload-image"
+        headers = {"api-key": self._api_key}
+        data = {"annotations": Annotations(annotations=annotations).model_dump_json()}
+        files = {
+            "image": (
+                image_file.name,
+                open(image_file, "rb"),
+                f"image/{image_file.suffix.replace('.', '')}",
+            )
+        }
+        httpx.post(endpoint, headers=headers, data=data, files=files)
